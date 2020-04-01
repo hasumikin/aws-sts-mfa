@@ -1,3 +1,6 @@
-# -
-#   profile: profile-name
-#   mfa_arn: "arn:aws:iam::xxxxxxxxxxxx:mfa/username"
+-
+  profile: profile-name
+  mfa_arn: "arn:aws:iam::xxxxxxxxxxxx:mfa/username"
+-
+  profile: profile-name_2
+  mfa_arn: "arn:aws:iam::xxxxxxxxxxxx:mfa/username_2"
