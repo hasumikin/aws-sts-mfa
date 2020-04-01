@@ -1,0 +1,3 @@
+# -
+#   profile: profile-name
+#   mfa_arn: "arn:aws:iam::xxxxxxxxxxxx:mfa/username"
