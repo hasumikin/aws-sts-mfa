@@ -9,7 +9,7 @@ if  ARGV[0].nil? || %w(--help -h --usage).include?(ARGV[0])
   exit
 end
 
-yaml = YAML.load_file("./config.yml")
+yaml = YAML.load_file File.expand_path("../config.yml", File.realpath(__FILE__))
 config = yaml.find do |y|
   y["profile"] == ARGV[0]
 end
