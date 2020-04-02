@@ -10,7 +10,14 @@
 ```
 git clone https://github.com/hasumikin/aws-sts-mfa.git
 cd aws-sts-mfa
-./install.sh
+make install
+```
+
+### Uninstallation
+
+```
+cd aws-sts-mfa
+make uninstall
 ```
 
 ### Configuration
