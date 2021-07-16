@@ -35,6 +35,7 @@ if %w(clear reset delete remove).include?(mfa_token)
   puts Open3.capture3("cat ~/.awsrc")
   puts
   puts "please run manually: . ~/.awsrc"
+  puts "or paste the credential to proper section in ~/.aws/credentials"
   exit
 end
 
