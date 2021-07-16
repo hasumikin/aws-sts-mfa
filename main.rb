@@ -11,13 +11,14 @@ end
 
 yaml = YAML.load_file File.expand_path("../config.yml", File.realpath(__FILE__))
 config = yaml.find do |y|
-  y["profile"] == ARGV[0]
+  y["name"] == ARGV[0]
 end
 if config.nil?
   puts "profile not found. check config.yml"
   exit
 end
 
+name = config["name"]
 profile = config["profile"]
 mfa_arn = config["mfa_arn"]
 
@@ -35,7 +36,6 @@ if %w(clear reset delete remove).include?(mfa_token)
   puts Open3.capture3("cat ~/.awsrc")
   puts
   puts "please run manually: . ~/.awsrc"
-  puts "or paste the credential to proper section in ~/.aws/credentials"
   exit
 end
 
@@ -53,9 +53,15 @@ begin
   Open3.capture3("echo 'export AWS_ACCESS_KEY_ID=#{obj["Credentials"]["AccessKeyId"]}'          > ~/.awsrc")
   Open3.capture3("echo 'export AWS_SECRET_ACCESS_KEY=#{obj["Credentials"]["SecretAccessKey"]}' >> ~/.awsrc")
   Open3.capture3("echo 'export AWS_SESSION_TOKEN=#{obj["Credentials"]["SessionToken"]}'        >> ~/.awsrc")
-  puts Open3.capture3("cat ~/.awsrc")
-  puts
   puts "please run manually: . ~/.awsrc"
+  puts
+  puts "or paste snippet below to ~/.aws/credentials"
+  puts
+  puts "[#{name}]"
+  puts "aws_access_key_id=#{obj["Credentials"]["AccessKeyId"]}"
+  puts "aws_secret_access_key=#{obj["Credentials"]["SecretAccessKey"]}"
+  puts "aws_session_token=#{obj["Credentials"]["SessionToken"]}"
+  puts
 rescue => e
   p e
   puts stderr
